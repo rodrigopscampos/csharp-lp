@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CSharpLP
 {
     public class ArrayLP
     {
-        static void Array_Ex1()
+        public static void Array_Ex1()
         {
             //Crie um array de inteiros de comprimento 10000 
             //e preencha com os números de 1 a 10000
@@ -21,7 +22,7 @@ namespace CSharpLP
             Console.ReadLine();
         }
 
-        static void Array_Ex2()
+        public static void Array_Ex2()
         {
             //Crie um array de tamanho informado pelo usuário,
             //preencha e imprima o conteúdo do array
@@ -48,7 +49,7 @@ namespace CSharpLP
             Console.ReadLine();
         }
 
-        static void Array_Ex3()
+        public static void Array_Ex3()
         {
             //Implemente um algoritmo que percorra uma string e 
             //imprima apenas os números
@@ -69,7 +70,7 @@ namespace CSharpLP
             Console.ReadLine();
         }
 
-        static void Array_Ex4()
+        public static void Array_Ex4()
         {
             //Implemente um algoritmo que encontra o maior
             //e o menor número de um array
@@ -95,7 +96,7 @@ namespace CSharpLP
             }
         }
 
-        static void Array_Ex05()
+        public static void Array_Ex05()
         {
             //Implemente um algoritmo que ordena um array
 
@@ -151,6 +152,83 @@ namespace CSharpLP
 
 
             Console.ReadLine();
+        }
+
+        public static void Foreach_Ex01()
+        {
+            //Percorra um array e imprima o valor de cada item utilizando foreach
+            int[] array = new[] { 1, 1, 2, 2, 3, 4, 5 };
+
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void Foreach_Ex02()
+        {
+            //Some o valor de todos os ítens de um array de int
+            int[] array = new[] { 1, 1, 2, 2, 3, 4, 5 };
+
+            int soma = 0;
+            foreach (var item in array)
+            {
+                soma += item;
+            }
+
+            Console.WriteLine(soma);
+        }
+
+        public static void Foreach_Ex03()
+        {
+            //Implemente um algoritmo que imprima um array de maneira agradável
+
+            int[] array = new[] { 1, 1, 2, 2, 3, 4, 5 };
+
+            Console.Write("[");
+            bool item1 = true;
+            foreach (var item in array)
+            {
+                if (item1)
+                {
+                    Console.Write(item);
+                    item1 = false;
+                }
+                else
+                {
+                    Console.Write(", " + item);
+                }
+            }
+            Console.Write("]");
+        }
+
+        public static void Foreach_Ex04()
+        {
+            //Percorra um array e encontre todos os números repetidos, depois,
+            //monte um novo array com apenas um item de cada.
+
+            int[] array = new[] { 10, 1, 1, 2, 2, 3, 4, 5 };
+
+            Console.WriteLine("[" + string.Join(", ", array) + "]");
+            Console.WriteLine();
+
+            var repetidos = array
+                .GroupBy(i => i)
+                .Where(item => item.Count() > 1);
+
+            Console.WriteLine("Repetidos: ");
+            foreach (var item in repetidos)
+            {
+                Console.WriteLine("Item: " + item.Key + " Value: " + item.Count());
+            }
+
+            array = array.Distinct().ToArray();
+
+            Console.WriteLine("Limpo: ");
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

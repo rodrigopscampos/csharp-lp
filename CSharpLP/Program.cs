@@ -6,7 +6,8 @@ namespace CSharpLP
     {
         static void Main(string[] args)
         {
-            
+            ArrayLP.Foreach_Ex04();
+            Console.Read();
         }
     }
 }
