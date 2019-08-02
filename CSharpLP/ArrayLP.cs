@@ -202,30 +202,81 @@ namespace CSharpLP
             Console.Write("]");
         }
 
-        public static void Foreach_Ex04()
+        public static void Foreach_Ex04_ModoRaiz()
         {
             //Percorra um array e encontre todos os números repetidos, depois,
             //monte um novo array com apenas um item de cada.
 
-            int[] array = new[] { 10, 1, 1, 2, 2, 3, 4, 5 };
+            int[] entrada = new[] { 10, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 };
 
-            Console.WriteLine("[" + string.Join(", ", array) + "]");
+            Console.WriteLine("[" + string.Join(", ", entrada) + "]");
             Console.WriteLine();
 
-            var repetidos = array
+            //O primeiro passo é ordenar o array, para não escrever todo o bloco de laço
+            //vou utilizar o OrderBy, que faz isso mais fácil
+            //(apenas para economizar linhas, porque o foco não é ordenação)
+            entrada = entrada.OrderBy(i => i).ToArray();
+
+            Console.WriteLine("Repetidos: ");
+            for (int a = 0; a < entrada.Length - 1; a++)
+            {
+                int b = a + 1;
+                int qtdOcorrencias = 1;
+
+                while (entrada[a] == entrada[b])
+                {
+                    qtdOcorrencias++;
+                    b++;
+                }
+
+                if (qtdOcorrencias > 1)
+                {
+                    Console.WriteLine("Item: " + entrada[a] + " Quantidade: " + qtdOcorrencias);
+                    a = b - 1;
+                }
+            }
+
+            Console.WriteLine("Limpo: ");
+            for (int a = 0; a < entrada.Length;)
+            {
+                int b = a + 1;
+                if (b < entrada.Length)
+                {
+                    while (entrada[a] == entrada[b])
+                    {
+                        b++;
+                    }
+                }
+
+                Console.WriteLine(entrada[a]);
+                a = b;
+            }
+        }
+
+        public static void Foreach_Ex04_ModoNutella()
+        {
+            //Percorra um array e encontre todos os números repetidos, depois,
+            //monte um novo array com apenas um item de cada.
+
+            int[] entrada = new[] { 10, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 };
+
+            Console.WriteLine("[" + string.Join(", ", entrada) + "]");
+            Console.WriteLine();
+
+            var repetidos = entrada
                 .GroupBy(i => i)
                 .Where(item => item.Count() > 1);
 
             Console.WriteLine("Repetidos: ");
             foreach (var item in repetidos)
             {
-                Console.WriteLine("Item: " + item.Key + " Value: " + item.Count());
+                Console.WriteLine("Item: " + item.Key + " Quantidade: " + item.Count());
             }
 
-            array = array.Distinct().ToArray();
+            entrada = entrada.Distinct().ToArray();
 
             Console.WriteLine("Limpo: ");
-            foreach (var item in array)
+            foreach (var item in entrada)
             {
                 Console.WriteLine(item);
             }
