@@ -6,9 +6,14 @@ namespace CSharpLP
     {
         static void Main(string[] args)
         {
-            ArrayLP.Foreach_Ex04_ModoRaiz();
-            ArrayLP.Foreach_Ex04_ModoNutella();
-            Console.Read();
+            Console.Write("Informe o primeiro número: ");
+            int a = Metodos.LerInt();
+
+            bool positivo = Metodos.EhPositivo(a);
+           
+            Metodos.PrintarEmAzul(positivo.ToString());
+
+            Console.ReadLine();
         }
     }
 }
